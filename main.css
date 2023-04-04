@@ -10,7 +10,6 @@
 	position: absolute;
 	top: 25%;
 	left: 25%;
-	transform: translate(-25% -25%);
 	width: 640px;
 	height: 640px;
 	border: 1px solid black;
