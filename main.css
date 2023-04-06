@@ -1,57 +1,13 @@
-html,
-body {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  font-family: sans-serif;
-}
-
-div * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-#game {
-  max-width: 504px;
-  max-height: 504px;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  margin: 20px auto;
-}
-
-.squareID {
-  width: 100%;
-  height: 100%;
-  max-width: 50px;
-  max-height: 50px;
-  float: left;
-  margin: 3px;
-  padding: 15px 0 0 20px;
-}
-
-.square {
-  border: 1px solid #000;
-  width: 100%;
-  height: 100%;
-  max-width: 50px;
-  max-height: 50px;
-  float: left;
-  margin: 3px;
-  transition: all 0.5s ease-in-out;
-  border-radius: 5px;
-  font-size: 30pt;
-  padding: 0 0 0 6px;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.grey {
-  background: lightslategray;
-}
-
-.green {
-  background: green !important;
-}
+#ChessBoard{
+	width:420px;
+	height:420px;
+	border:1px solid black;
+  }
+  div{
+	width:52px;
+	height:52px;
+	float:left;
+	font-size:40px;
+	line-height:52px;
+	text-align:center;
+  }
