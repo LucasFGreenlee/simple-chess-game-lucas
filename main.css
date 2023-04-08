@@ -1,13 +1,27 @@
-#ChessBoard{
-	width:420px;
-	height:420px;
-	border:1px solid black;
-  }
-  div{
-	width:52px;
-	height:52px;
-	float:left;
-	font-size:40px;
-	line-height:52px;
-	text-align:center;
-  }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.board {
+	display: grid;
+	grid-template-columns: repeat(8, 80px);
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	transform: translate(-25% -25%);
+	width: 640px;
+	height: 640px;
+	border: 1px solid black;
+}
+
+.square {
+	height: 80px;
+	width: 80px;
+	border: 1px solid black;
+}
+
+.lightblue {
+	background: lightblue;
+}

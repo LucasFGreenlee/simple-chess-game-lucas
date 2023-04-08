@@ -1,43 +1,107 @@
+const ctx = game.getContext('2d');
+game.setAttribute('height', getComputedStyle(game)['height']);
+game.setAttribute('width', getComputedStyle(game)['width']);
 
-let map = [
-  3, 5, 4, 2, 1, 4, 5, 3,
-  6, 6, 6, 6, 6, 6, 6, 6,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  0, 0, 0, 0, 0, 0, 0, 0,
-  12, 12, 12, 12, 12, 12, 12, 12,
-  9, 11, 10, 8, 7, 10, 11, 9,
-];
+const board = document.getElementById("ChessBoard");
+
+let white = true
+
+for (let i = 1; i < 64; i++) {
+    let square = document.createElement('div')
+    square.classList.add('square')
+    if (!white) {
+        square.classList.add('lightblue')
+    }
+    white = !white
+    if (i % 8 === 0) {
+        white = !white
+    }
+    board.appendChild(square)
+}
+
+let b_pawn1;
+let b_pawn2;
+let b_pawn3;
+let b_pawn4;
+let b_pawn5;
+let b_pawn6;
+let b_pawn7;
+let b_pawn8;
+let b_king;
+let b_queen;
+let b_bishop1;
+let b_bishop2;
+let b_knight1;
+let b_knight2;
+let b_rook1;
+let b_rook2;
+let w_pawn1 ;
+let w_pawn2 ;
+let w_pawn3 ;
+let w_pawn4 ;
+let w_pawn5 ;
+let w_pawn6 ;
+let w_pawn7 ;
+let w_pawn8 ;
+let w_king;
+let w_queen;
+let w_bishop1;
+let w_bishop2;
+let w_knight1;
+let w_knight2;
+let w_rook1;
+let w_rook2;
 
 class chessPiece {
-  constructor(image, type) {
-      this.image = image;
-      this.type = type;
-      this.captured = false;
-      this.moved = false;
-      this.draggable = true;
+  constructor(x, y, image, type, team) {
+    this.x = x;
+    this.y = y;
+    this.image = image;
+    this.type = type;
+    this.team = team;
+    this.captured = false;
+    this.moved = false;
+    this.draggable = true;
 
-      this.render = function() {
-          ctx.drawImage(this.x, this.y, this.image, this.type);
-      }
+    this.render = function () {
+      ctx.drawImage(this.x, this.y, this.image, this.type, this.team);
+    }
   }
 }
 
-let board = document.getElementById("ChessBoard");
-let bPawn = new chessPiece("&#" + 9823 + ";", 'bPawn')
-let bKing = new chessPiece("&#" + 9818 + ";", 'bKing')
-let bQueen = new chessPiece("&#" + 9819 + ";", 'bQueen')
-let bBishop = new chessPiece("&#" + 9821 + ";", 'bBishop')
-let bKnight = new chessPiece("&#" + 9822 + ";", 'bKnight')
-let bRook = new chessPiece("&#" + 9820 + ";", 'bRook')
-let wPawn = new chessPiece("&#" + 9817 + ";", 'wPawn')
-let wKing = new chessPiece("&#" + 9812 + ";", 'wKing')
-let wQueen = new chessPiece("&#" + 9813 + ";", 'wQueen')
-let wBishop = new chessPiece("&#" + 9815 + ";", 'wBishop')
-let wKnight = new chessPiece("&#" + 9816 + ";", 'wKnight')
-let wRook = new chessPiece("&#" + 9814 + ";", 'wRook')
-
+let pieces = [
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9823 + ";", 'Pawn', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9818 + ";", 'King', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9819 + ";", 'Queen', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9821 + ";", 'Bishop', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9821 + ";", 'Bishop', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9822 + ";", 'Knight', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9822 + ";", 'Knight', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9820 + ";", 'Rook', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9820 + ";", 'Rook', 'Black'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9817 + ";", 'Pawn', 'White'),
+  new chessPiece('x', 'y', "&#" + 9812 + ";", 'King', 'White'),
+  new chessPiece('x', 'y', "&#" + 9813 + ";", 'Queen', 'White'),
+  new chessPiece('x', 'y', "&#" + 9815 + ";", 'Bishop', 'White'),
+  new chessPiece('x', 'y', "&#" + 9815 + ";", 'Bishop', 'White'),
+  new chessPiece('x', 'y', "&#" + 9816 + ";", 'Knight', 'White'),
+  new chessPiece('x', 'y', "&#" + 9816 + ";", 'Knight', 'White'),
+  new chessPiece('x', 'y', "&#" + 9814 + ";", 'Rook', 'White'),
+  new chessPiece('x', 'y', "&#" + 9814 + ";", 'Rook', 'White')]
 
 for (let i = 0; i < map.length; i++) {
   let tile = document.createElement("div");
@@ -45,50 +109,7 @@ for (let i = 0; i < map.length; i++) {
   tile.style.backgroundColor = parseInt((i / 8) + i) % 2 == 0 ? 'white' : 'lightblue';
   // place pieces on the board
   // tile.innerHTML = !map[i] ? "" : "&#"+ (9811+map[i]) +";";
-  switch (map[i]) {
-    case 0:
-      break;
-    case 6: // black pawns
-      bPawn.render()
-      break;
-    case 12: // white pawns
-      wPawn.render()
-      break;
-    case 11: // white knights
-      wKnight.render()
-      break;
-    case 10: // white bishops
-      wBishop.render()
-      break;
-    case 9: // white rooks
-      wRook.render()
-      break;
-    case 8: // white queen
-      wQueen.render()
-      break;
-    case 7: // white king
-     wKing.render()
-      break;
-    case 5: // black knights
-      bKnight.render()
-      break;
-    case 4: // black bishops
-      bBishop.render()
-      break;
-    case 3: // black rooks
-      bRook.render()
-      break;
-    case 2: // black queen
-      bQueen.render()
-      break;
-    case 1: // black king
-      bKing.render()
-      break;
-    // add all pieces as case statements but dont delete default
-    default:
 
-      break;
-  }
   board.appendChild(tile);
 }
 
