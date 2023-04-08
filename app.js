@@ -11,9 +11,7 @@ let map = [
 ];
 
 class chessPiece {
-  constructor(x, y, image, type) {
-      this.x = x;
-      this.y = y;
+  constructor(image, type) {
       this.image = image;
       this.type = type;
       this.captured = false;
@@ -26,246 +24,19 @@ class chessPiece {
   }
 }
 
-let main = {
-
-  variables: {
-    turn: 'w',
-    selectedpiece: '',
-    highlighted: [],
-    pieces: {
-      w_king: {
-        position: '7',
-        img: '&#9812;',
-        captured: false,
-        moved: false,
-        type: 'w_king'
-
-      },
-      w_queen: {
-        position: '8',
-        img: '&#9813;',
-        captured: false,
-        moved: false,
-        type: 'w_queen'
-      },
-      w_bishop1: {
-        position: '10',
-        img: '&#9815;',
-        captured: false,
-        moved: false,
-        type: 'w_bishop'
-      },
-      w_bishop2: {
-        position: '10',
-        img: '&#9815;',
-        captured: false,
-        moved: false,
-        type: 'w_bishop'
-      },
-      w_knight1: {
-        position: '11',
-        img: '&#9816;',
-        captured: false,
-        moved: false,
-        type: 'w_knight'
-      },
-      w_knight2: {
-        position: '11',
-        img: '&#9816;',
-        captured: false,
-        moved: false,
-        type: 'w_knight'
-      },
-      w_rook1: {
-        position: '9',
-        img: '&#9814;',
-        captured: false,
-        moved: false,
-        type: 'w_rook'
-      },
-      w_rook2: {
-        position: '9',
-        img: '&#9814;',
-        captured: false,
-        moved: false,
-        type: 'w_rook'
-      },
-      w_pawn1: {
-        position: '12',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-      w_pawn2: {
-        position: '12',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-      w_pawn3: {
-        position: '12_3',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-      w_pawn4: {
-        position: '12_4',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-      w_pawn5: {
-        position: '12_5',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-      w_pawn6: {
-        position: '12_6',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-      w_pawn7: {
-        position: '12_7',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-      w_pawn8: {
-        position: '12_8',
-        img: '&#9817;',
-        captured: false,
-        type: 'w_pawn',
-        moved: false
-      },
-
-      b_king: {
-        position: '1',
-        img: '&#9818;',
-        captured: false,
-        moved: false,
-        type: 'b_king'
-      },
-      b_queen: {
-        position: '2',
-        img: '&#9819;',
-        captured: false,
-        moved: false,
-        type: 'b_queen'
-      },
-      b_bishop1: {
-        position: '4',
-        img: '&#9821;',
-        captured: false,
-        moved: false,
-        type: 'b_bishop'
-      },
-      b_bishop2: {
-        position: '4',
-        img: '&#9821;',
-        captured: false,
-        moved: false,
-        type: 'b_bishop'
-      },
-      b_knight1: {
-        position: '5',
-        img: '&#9822;',
-        captured: false,
-        moved: false,
-        type: 'b_knight'
-      },
-      b_knight2: {
-        position: '5',
-        img: '&#9822;',
-        captured: false,
-        moved: false,
-        type: 'b_knight'
-      },
-      b_rook1: {
-        position: '3',
-        img: '&#9820;',
-        captured: false,
-        moved: false,
-        type: 'b_rook'
-      },
-      b_rook2: {
-        position: '3',
-        img: '&#9820;',
-        captured: false,
-        moved: false,
-        type: 'b_rook'
-      },
-      b_pawn1: {
-        position: '6',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      },
-      b_pawn2: {
-        position: '6',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      },
-      b_pawn3: {
-        position: '6_3',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      },
-      b_pawn4: {
-        position: '6_4',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      },
-      b_pawn5: {
-        position: '6_5',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      },
-      b_pawn6: {
-        position: '6_6',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      },
-      b_pawn7: {
-        position: '6_7',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      },
-      b_pawn8: {
-        position: '6_8',
-        img: '&#9823;',
-        captured: false,
-        type: 'b_pawn',
-        moved: false
-      }
-
-    }
-  },
-}
-
 let board = document.getElementById("ChessBoard");
-//let bpawn1 = 
+let bPawn = new chessPiece("&#" + 9823 + ";", 'bPawn')
+let bKing = new chessPiece("&#" + 9818 + ";", 'bKing')
+let bQueen = new chessPiece("&#" + 9819 + ";", 'bQueen')
+let bBishop = new chessPiece("&#" + 9821 + ";", 'bBishop')
+let bKnight = new chessPiece("&#" + 9822 + ";", 'bKnight')
+let bRook = new chessPiece("&#" + 9820 + ";", 'bRook')
+let wPawn = new chessPiece("&#" + 9817 + ";", 'wPawn')
+let wKing = new chessPiece("&#" + 9812 + ";", 'wKing')
+let wQueen = new chessPiece("&#" + 9813 + ";", 'wQueen')
+let wBishop = new chessPiece("&#" + 9815 + ";", 'wBishop')
+let wKnight = new chessPiece("&#" + 9816 + ";", 'wKnight')
+let wRook = new chessPiece("&#" + 9814 + ";", 'wRook')
 
 
 for (let i = 0; i < map.length; i++) {
@@ -278,40 +49,40 @@ for (let i = 0; i < map.length; i++) {
     case 0:
       break;
     case 6: // black pawns
-      tile.innerHTML = "&#" + (9823) + ";";
+      bPawn.render()
       break;
     case 12: // white pawns
-      tile.innerHTML = "&#" + (9817) + ";";
+      wPawn.render()
       break;
-    case 11:
-      tile.innerHTML = "&#" + (9816) + ";";
+    case 11: // white knights
+      wKnight.render()
       break;
-    case 10:
-      tile.innerHTML = "&#" + (9815) + ";";
+    case 10: // white bishops
+      wBishop.render()
       break;
-    case 9:
-      tile.innerHTML = "&#" + (9814) + ";";
+    case 9: // white rooks
+      wRook.render()
       break;
-    case 8:
-      tile.innerHTML = "&#" + (9813) + ";";
+    case 8: // white queen
+      wQueen.render()
       break;
-    case 7:
-      tile.innerHTML = "&#" + (9812) + ";";
+    case 7: // white king
+     wKing.render()
       break;
-    case 5:
-      tile.innerHTML = "&#" + (9822) + ";";
+    case 5: // black knights
+      bKnight.render()
       break;
-    case 4:
-      tile.innerHTML = "&#" + (9821) + ";";
+    case 4: // black bishops
+      bBishop.render()
       break;
-    case 3:
-      tile.innerHTML = "&#" + (9820) + ";";
+    case 3: // black rooks
+      bRook.render()
       break;
-    case 2:
-      tile.innerHTML = "&#" + (9819) + ";";
+    case 2: // black queen
+      bQueen.render()
       break;
-    case 1:
-      tile.innerHTML = "&#" + (9818) + ";";
+    case 1: // black king
+      bKing.render()
       break;
     // add all pieces as case statements but dont delete default
     default:
