@@ -8,6 +8,8 @@ base class Piece
     position
     img src = "?"
     movement rule
+    draggable = true
+    ondragstart(event)
 
 
 newPawn = new Piece (position, img-src)
