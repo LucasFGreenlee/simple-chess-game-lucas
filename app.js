@@ -2,22 +2,49 @@ const ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height']);
 game.setAttribute('width', getComputedStyle(game)['width']);
 
-const ChessBoard = document.getElementById("ChessBoard");
-
-let white = true
-
-for (let i = 1; i < 64; i++) {
-    let square = document.createElement('div')
-    square.classList.add('square')
-    if (!white) {
-        square.classList.add('lightblue')
+var center = document.createElement('center');
+  
+// Create a table element
+var ChessTable = document.createElement('table');
+for (var i = 0; i < 8; i++) {
+  
+    // Create a row
+    var tr = document.createElement('tr');
+    for (var j = 0; j < 8; j++) {
+  
+        // Create a cell
+        var td = document.createElement('td');
+  
+        // If the sum of cell coordinates is even
+        // then color the cell white
+        if ((i + j) % 2 == 0) {
+  
+            // Create a class attribute for all white cells
+            td.setAttribute('class', 'cell whitecell');
+            tr.appendChild(td);
+        }
+  
+        // If the sum of cell coordinates is odd then
+        // color the cell black
+        else {
+  
+            // Create a class attribute for all black cells
+            td.setAttribute('class', 'cell blackcell');
+  
+            // Append the cell to its row
+            tr.appendChild(td);
+        }
     }
-    white = !white
-    if (i % 8 === 0) {
-        white = !white
-    }
-    ChessBoard.appendChild(square)
+  
+    // Append the row
+    ChessTable.appendChild(tr);
 }
+center.appendChild(ChessTable);
+  
+// Modifying table attribute properties
+ChessTable.setAttribute('cellspacing', '0');
+ChessTable.setAttribute('width', '640px');
+document.body.appendChild(center);
 
 let b_pawn1;
 let b_pawn2;
