@@ -2,7 +2,7 @@ const ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height']);
 game.setAttribute('width', getComputedStyle(game)['width']);
 
-const board = document.getElementById("ChessBoard");
+const ChessBoard = document.getElementById("ChessBoard");
 
 let white = true
 
@@ -16,7 +16,7 @@ for (let i = 1; i < 64; i++) {
     if (i % 8 === 0) {
         white = !white
     }
-    board.appendChild(square)
+    ChessBoard.appendChild(square)
 }
 
 let b_pawn1;
@@ -103,13 +103,4 @@ let pieces = [
   new chessPiece('x', 'y', "&#" + 9814 + ";", 'Rook', 'White'),
   new chessPiece('x', 'y', "&#" + 9814 + ";", 'Rook', 'White')]
 
-for (let i = 0; i < map.length; i++) {
-  let tile = document.createElement("div");
-  // setting tiles background color
-  tile.style.backgroundColor = parseInt((i / 8) + i) % 2 == 0 ? 'white' : 'lightblue';
-  // place pieces on the board
-  // tile.innerHTML = !map[i] ? "" : "&#"+ (9811+map[i]) +";";
-
-  board.appendChild(tile);
-}
 
