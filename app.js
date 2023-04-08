@@ -15,9 +15,10 @@ class chessPiece {
       this.x = x;
       this.y = y;
       this.image = image;
+      this.type = type;
       this.captured = false;
       this.moved = false;
-      this.type = type;
+      this.draggable = true;
 
       this.render = function() {
           ctx.drawImage(this.x, this.y, this.image, this.type);
