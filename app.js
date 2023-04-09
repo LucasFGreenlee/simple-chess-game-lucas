@@ -35,8 +35,8 @@ let w_knight2;
 let w_rook1;
 let w_rook2;
 
-class chessPiece {
-  constructor(x, y, image, type, team,) {
+class ChessPiece {
+  constructor(image, x, y, width, height, type, team,) {
     this.x = x;
     this.y = y;
     this.image = image;
@@ -47,7 +47,10 @@ class chessPiece {
     this.draggable = true;
 
     this.render = function () {
-      ctx.drawImage(this.x, this.y, this.image, this.type, this.team);
+      console.log('testing', ctx);
+      console.log('test 2', ctx.drawImage);
+      ctx.drawImage(this.image, this.x, this.y, this.type, this.team);
+     
     }
   }
 }
@@ -79,38 +82,39 @@ document.body.appendChild(center);
 
 window.addEventListener('DOMContentLoaded', function () {
 
-  b_pawn1 = new chessPiece(40, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_pawn2 = new chessPiece(120, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_pawn3 = new chessPiece(200, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_pawn4 = new chessPiece(280, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_pawn5 = new chessPiece(360, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_pawn6 = new chessPiece(440, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_pawn7 = new chessPiece(520, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_pawn8 = new chessPiece(600, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
-  b_king = new chessPiece(280, 60, "&#" + 9818 + ";", 'King', 'Black')
-  b_queen = new chessPiece(360, 60, "&#" + 9819 + ";", 'Queen', 'Black')
-  b_bishop1 = new chessPiece(200, 60, "&#" + 9821 + ";", 'Bishop', 'Black')
-  b_bishop2 = new chessPiece(440, 60, "&#" + 9821 + ";", 'Bishop', 'Black')
-  b_knight1 = new chessPiece(120, 60, "&#" + 9822 + ";", 'Knight', 'Black')
-  b_knight2 = new chessPiece(520, 60, "&#" + 9822 + ";", 'Knight', 'Black')
-  b_rook1 = new chessPiece(40, 60, "&#" + 9820 + ";", 'Rook', 'Black')
-  b_rook2 = new chessPiece(600, 60, "&#" + 9820 + ";", 'Rook', 'Black')
-  w_pawn1 = new chessPiece(40, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_pawn2 = new chessPiece(120, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_pawn3 = new chessPiece(200, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_pawn4 = new chessPiece(280, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_pawn5 = new chessPiece(360, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_pawn6 = new chessPiece(440, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_pawn7 = new chessPiece(520, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_pawn8 = new chessPiece(600, 520, "&#" + 9817 + ";", 'Pawn', 'White')
-  w_king = new chessPiece(280, 600, "&#" + 9812 + ";", 'King', 'White')
-  w_queen = new chessPiece(360, 600, "&#" + 9813 + ";", 'Queen', 'White')
-  w_bishop1 = new chessPiece(200, 600, "&#" + 9815 + ";", 'Bishop', 'White')
-  w_bishop2 = new chessPiece(440, 600, "&#" + 9815 + ";", 'Bishop', 'White')
-  w_knight1 = new chessPiece(120, 600, "&#" + 9816 + ";", 'Knight', 'White')
-  w_knight2 = new chessPiece(520, 600, "&#" + 9816 + ";", 'Knight', 'White')
-  w_rook1 = new chessPiece(40, 600, "&#" + 9814 + ";", 'Rook', 'White')
-  w_rook2 = new chessPiece(600, 600, "&#" + 9814 + ";", 'Rook', 'White')
+  b_pawn1 = new ChessPiece(40, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  b_pawn2 = new ChessPiece(120, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  console.log('black pawn', b_pawn2);
+  b_pawn3 = new ChessPiece(200, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  b_pawn4 = new ChessPiece(280, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  b_pawn5 = new ChessPiece(360, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  b_pawn6 = new ChessPiece(440, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  b_pawn7 = new ChessPiece(520, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  b_pawn8 = new ChessPiece(600, 120, "&#" + 9823 + ";", 'Pawn', 'Black')
+  b_king = new ChessPiece(280, 60, "&#" + 9818 + ";", 'King', 'Black')
+  b_queen = new ChessPiece(360, 60, "&#" + 9819 + ";", 'Queen', 'Black')
+  b_bishop1 = new ChessPiece(200, 60, "&#" + 9821 + ";", 'Bishop', 'Black')
+  b_bishop2 = new ChessPiece(440, 60, "&#" + 9821 + ";", 'Bishop', 'Black')
+  b_knight1 = new ChessPiece(120, 60, "&#" + 9822 + ";", 'Knight', 'Black')
+  b_knight2 = new ChessPiece(520, 60, "&#" + 9822 + ";", 'Knight', 'Black')
+  b_rook1 = new ChessPiece(40, 60, "&#" + 9820 + ";", 'Rook', 'Black')
+  b_rook2 = new ChessPiece(600, 60, "&#" + 9820 + ";", 'Rook', 'Black')
+  w_pawn1 = new ChessPiece(40, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_pawn2 = new ChessPiece(120, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_pawn3 = new ChessPiece(200, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_pawn4 = new ChessPiece(280, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_pawn5 = new ChessPiece(360, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_pawn6 = new ChessPiece(440, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_pawn7 = new ChessPiece(520, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_pawn8 = new ChessPiece(600, 520, "&#" + 9817 + ";", 'Pawn', 'White')
+  w_king = new ChessPiece(280, 600, "&#" + 9812 + ";", 'King', 'White')
+  w_queen = new ChessPiece(360, 600, "&#" + 9813 + ";", 'Queen', 'White')
+  w_bishop1 = new ChessPiece(200, 600, "&#" + 9815 + ";", 'Bishop', 'White')
+  w_bishop2 = new ChessPiece(440, 600, "&#" + 9815 + ";", 'Bishop', 'White')
+  w_knight1 = new ChessPiece(120, 600, "&#" + 9816 + ";", 'Knight', 'White')
+  w_knight2 = new ChessPiece(520, 600, "&#" + 9816 + ";", 'Knight', 'White')
+  w_rook1 = new ChessPiece(40, 600, "&#" + 9814 + ";", 'Rook', 'White')
+  w_rook2 = new ChessPiece(600, 600, "&#" + 9814 + ";", 'Rook', 'White')
 
   const runGame = setInterval(gameLoop, 10);
 });
