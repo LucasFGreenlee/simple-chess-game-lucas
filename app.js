@@ -2,6 +2,19 @@ const ctx = game.getContext('2d');
 game.setAttribute('height', getComputedStyle(game)['height']);
 game.setAttribute('width', getComputedStyle(game)['width']);
 
+const bBishop = document.getElementById('b-Bishop');
+const bKnight = document.getElementById('b-Knight');
+const bKing = document.getElementById('b-King');
+const bPawn = document.getElementById('b-Pawn');
+const bQueen = document.getElementById('b-Queen');
+const bRook = document.getElementById('b-Rook');
+const wBishop = document.getElementById('w-Bishop');
+const wKnight = document.getElementById('w-Knight');
+const wKing = document.getElementById('w-King');
+const wPawn = document.getElementById('w-Pawn');
+const wQueen = document.getElementById('w-Queen');
+const wRook = document.getElementById('w-Rook');
+
 let b_pawn1;
 let b_pawn2;
 let b_pawn3;
@@ -36,22 +49,18 @@ let w_rook1;
 let w_rook2;
 
 class ChessPiece {
-  constructor(image, width, height, x, y, type, team,) {
-    this.image = image;
-    this.width = width;
-    this.height = height;
-    this.x = x;
-    this.y = y;
-    this.type = type;
-    this.team = team;
-    this.captured = false;
-    this.moved = false;
-    this.draggable = true;
+  constructor(x, y, color, width, height) {
+      this.x = x;
+      this.y = y;
+      this.color = color;
+      this.width = width;
+      this.height = height;
+      this.alive = true;
 
-    this.render = function () {
-      ctx.drawImage(this.image, this.width, this.height, this.x, this.y, this.type, this.team);
-     
-    }
+      this.render = function() {
+          ctx.fillStyle = this.color;
+          ctx.fillRect(this.x, this.y, this.width, this.height);
+      }
   }
 }
 
@@ -82,43 +91,47 @@ document.body.appendChild(center);
 
 window.addEventListener('DOMContentLoaded', function () {
 
-  b_pawn1 = new ChessPiece("img/blackPawn.png", 35, 35,  40, 120, 'Pawn', 'Black')
-  b_pawn2 = new ChessPiece("img/blackPawn.png", 35, 35, 120, 120, 'Pawn', 'Black')
-  b_pawn3 = new ChessPiece("img/blackPawn.png", 35, 35, 200, 120, 'Pawn', 'Black')
-  b_pawn4 = new ChessPiece("img/blackPawn.png", 35, 35, 280, 120, 'Pawn', 'Black')
-  b_pawn5 = new ChessPiece("img/blackPawn.png", 35, 35, 360, 120, 'Pawn', 'Black')
-  b_pawn6 = new ChessPiece("img/blackPawn.png", 35, 35, 440, 120, 'Pawn', 'Black')
-  b_pawn7 = new ChessPiece("img/blackPawn.png", 35, 35, 520, 120, 'Pawn', 'Black')
-  b_pawn8 = new ChessPiece("img/blackPawn.png", 35, 35, 600, 120, 'Pawn', 'Black')
-  b_king = new ChessPiece( 'img/blackKing.png', 35, 35, 280, 60, 'King', 'Black')
-  b_queen = new ChessPiece('img/blackQueen.png', 35, 35, 360, 60, 'Queen', 'Black')
-  b_bishop1 = new ChessPiece("img/blackBishop.png" ,35, 35, 200, 60,'Bishop', 'Black')
-  b_bishop2 = new ChessPiece("img/blackBishop.png" ,35, 35, 440, 60, 'Bishop', 'Black')
-  b_knight1 = new ChessPiece("img/blackHorse.png" ,35, 35, 120, 60, 'Knight', 'Black')
-  b_knight2 = new ChessPiece("img/blackHorse.png" ,35, 35, 520, 60, 'Knight', 'Black')
-  b_rook1 = new ChessPiece("img/blackRook.png" ,35, 35, 40, 60, 'Rook', 'Black')
-  b_rook2 = new ChessPiece("img/blackRook.png" ,35, 35, 600, 60, 'Rook', 'Black')
-  w_pawn1 = new ChessPiece("img/whitePawn.png" ,35, 35, 40, 520, 'Pawn', 'White')
-  w_pawn2 = new ChessPiece("img/whitePawn.png" ,35, 35, 120, 520, 'Pawn', 'White')
-  w_pawn3 = new ChessPiece("img/whitePawn.png" ,35, 35, 200, 520, 'Pawn', 'White')
-  w_pawn4 = new ChessPiece("img/whitePawn.png" ,35, 35, 280, 520, 'Pawn', 'White')
-  w_pawn5 = new ChessPiece("img/whitePawn.png" ,35, 35, 360, 520, 'Pawn', 'White')
-  w_pawn6 = new ChessPiece("img/whitePawn.png", 35, 35, 440, 520, 'Pawn', 'White')
-  w_pawn7 = new ChessPiece("img/whitePawn.png" ,35, 35, 520, 520, 'Pawn', 'White')
-  w_pawn8 = new ChessPiece("img/whitePawn.png" ,35, 35, 600, 520, 'Pawn', 'White')
-  w_king = new ChessPiece("img/whiteKing.png" ,35, 35, 280, 600, 'King', 'White')
-  w_queen = new ChessPiece("img/whiteQueen.png" ,35, 35, 360, 600, 'Queen', 'White')
-  w_bishop1 = new ChessPiece("img/whiteBishop.png" ,35, 35, 200, 600, 'Bishop', 'White')
-  w_bishop2 = new ChessPiece("img/whiteBishop.png" ,35, 35, 440, 600, 'Bishop', 'White')
-  w_knight1 = new ChessPiece("img/whiteHorse.png" ,35, 35, 120, 600, 'Knight', 'White')
-  w_knight2 = new ChessPiece("img/whiteHorse.png" ,35, 35, 520, 600, 'Knight', 'White')
-  w_rook1 = new ChessPiece("img/whiteRook.png" ,35, 35, 40, 600, 'Rook', 'White')
-  w_rook2 = new ChessPiece("img/whiteRook.png" ,35, 35, 600, 600, 'Rook', 'White')
+  b_pawn1 = new ChessPiece(40, 120, "b-Pawn", 35, 35)
+  b_pawn2 = new ChessPiece(120, 120, "b-Pawn", 35, 35)
+  b_pawn3 = new ChessPiece(200, 120, "b-Pawn", 35, 35)
+  b_pawn4 = new ChessPiece(280, 120, "b-Pawn", 35, 35)
+  b_pawn5 = new ChessPiece(360, 120, "b-Pawn", 35, 35)
+  b_pawn6 = new ChessPiece(440, 120, "b-Pawn", 35, 35)
+  b_pawn7 = new ChessPiece(520, 120, "b-Pawn", 35, 35)
+  b_pawn8 = new ChessPiece(600, 120, "b-Pawn", 35, 35)
+  b_king = new ChessPiece(80, 60, "b-King", 35, 35)
+  b_queen = new ChessPiece(360, 60, "b-Queen", 35, 35)
+  b_bishop1 = new ChessPiece(200, 60, "b-Bishop", 35, 35)
+  b_bishop2 = new ChessPiece(440, 60, "b-Bishop", 35, 35)
+  b_knight1 = new ChessPiece(120, 60, "b-Knight", 35, 35)
+  b_knight2 = new ChessPiece(520, 60, "b-Knight", 35, 35)
+  b_rook1 = new ChessPiece(40, 60, "b-Rook", 35, 35)
+  b_rook2 = new ChessPiece(600, 60, "b-Rook", 35, 35)
+  w_pawn1 = new ChessPiece(40, 520, "w-Pawn", 35, 35)
+  w_pawn2 = new ChessPiece( 120, 520, "w-Pawn", 35, 35)
+  w_pawn3 = new ChessPiece(200, 520,  "w-Pawn", 35, 35)
+  w_pawn4 = new ChessPiece(280, 520, "w-Pawn", 35, 35)
+  w_pawn5 = new ChessPiece(360, 520, "w-Pawn", 35, 35)
+  w_pawn6 = new ChessPiece(440, 520, "w-Pawn", 35, 35)
+  w_pawn7 = new ChessPiece(520, 520, "w-Pawn", 35, 35)
+  w_pawn8 = new ChessPiece(600, 520, "w-Pawn", 35, 35)
+  w_king = new ChessPiece(280, 600, "w-King", 35, 35)
+  w_queen = new ChessPiece(360, 600, "w-Queen" , 35, 35)
+  w_bishop1 = new ChessPiece(200, 600, "w-Bishop", 35, 35)
+  w_bishop2 = new ChessPiece(440, 600, "w-Bishop", 35, 35)
+  w_knight1 = new ChessPiece(120, 600, "w-Knight", 35, 35)
+  w_knight2 = new ChessPiece(520, 600, "w-Knight", 35, 35)
+  w_rook1 = new ChessPiece(40, 600, "w-Rook",  35, 35)
+  w_rook2 = new ChessPiece(600, 600, "w-Rook",  35, 35)
 
   const runGame = setInterval(gameLoop, 10);
 });
 
 function gameLoop() {
+
+    // clear the canvas
+    ctx.clearRect(0, 0, game.width, game.height);
+    if (ChessPiece.alive) {
   b_pawn1.render()
   b_pawn2.render()
   b_pawn3.render()
@@ -151,4 +164,5 @@ function gameLoop() {
   w_knight2.render()
   w_rook1.render()
   w_rook2.render()
+}
 }
