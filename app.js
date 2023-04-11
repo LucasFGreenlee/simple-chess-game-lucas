@@ -1,168 +1,181 @@
-const ctx = game.getContext('2d');
-game.setAttribute('height', getComputedStyle(game)['height']);
-game.setAttribute('width', getComputedStyle(game)['width']);
+const boardArray = []; 
+let pieceBeingMoved;
 
-const bBishop = document.getElementById('b-Bishop');
-const bKnight = document.getElementById('b-Knight');
-const bKing = document.getElementById('b-King');
-const bPawn = document.getElementById('b-Pawn');
-const bQueen = document.getElementById('b-Queen');
-const bRook = document.getElementById('b-Rook');
-const wBishop = document.getElementById('w-Bishop');
-const wKnight = document.getElementById('w-Knight');
-const wKing = document.getElementById('w-King');
-const wPawn = document.getElementById('w-Pawn');
-const wQueen = document.getElementById('w-Queen');
-const wRook = document.getElementById('w-Rook');
+// defines the color of each square
+function squareColor(e, i) {
+  if ((i >= 0 && i <= 7) || (i >= 16 && i <= 23) || (i >= 32 && i <= 39) || (i >= 48 && i <= 55)) {
+    return i % 2 === 0 ? e.style.backgroundColor = "white" : e.style.backgroundColor = "lightblue";
+  }
+  if ((i >= 8 && i <= 15) || (i >= 24 && i <= 31) || (i >= 40 && i <= 47) || (i >= 56 && i <= 63)) {
+    return i % 2 !== 0 ? e.style.backgroundColor = "white" : e.style.backgroundColor = "lightblue";
+  }
+}
 
-let b_pawn1;
-let b_pawn2;
-let b_pawn3;
-let b_pawn4;
-let b_pawn5;
-let b_pawn6;
-let b_pawn7;
-let b_pawn8;
-let b_king;
-let b_queen;
-let b_bishop1;
-let b_bishop2;
-let b_knight1;
-let b_knight2;
-let b_rook1;
-let b_rook2;
-let w_pawn1;
-let w_pawn2;
-let w_pawn3;
-let w_pawn4;
-let w_pawn5;
-let w_pawn6;
-let w_pawn7;
-let w_pawn8;
-let w_king;
-let w_queen;
-let w_bishop1;
-let w_bishop2;
-let w_knight1;
-let w_knight2;
-let w_rook1;
-let w_rook2;
+// puts squares onto the board
+function renderSquares() {
+  let numOfSquares = 0;
+  const ChessBoard = document.querySelector(".ChessBoard")
+  while (numOfSquares < 64) {
+    const chessSquare = document.createElement("div")
+    chessSquare.classList.add("chessSquare")
+    boardArray.push(chessSquare)
+    numOfSquares += 1;
+  }
+  boardArray.forEach((e, i) => {
+    squareColor(e, i)
+    e.addEventListener("click", function () {
+      console.log(i, e)
+    })
+  })
+  return boardArray.forEach((e) => {
+    return ChessBoard.append(e)
+  })
+}
 
-class ChessPiece {
-  constructor(x, y, color, width, height) {
-      this.x = x;
-      this.y = y;
-      this.color = color;
-      this.width = width;
-      this.height = height;
-      this.alive = true;
+renderSquares()
 
-      this.render = function() {
-          ctx.fillStyle = this.color;
-          ctx.fillRect(this.x, this.y, this.width, this.height);
+// creates div's for each piece
+function createPieces(boardArray) {
+  let pieces = 0
+  const whitePieces = []
+  const blackPieces = []
+  while (pieces < 16) {
+    const whitePiece = document.createElement("div")
+    whitePiece.classList.add("whitePiece")
+    whitePiece.setAttribute("draggable", "true")
+    whitePieces.push(whitePiece)
+    const blackPiece = document.createElement("div")
+    blackPiece.classList.add("blackPiece")
+    blackPiece.setAttribute("draggable", "true")
+    blackPieces.push(blackPiece)
+    pieces += 1
+  }
+  determineChessPieceById(whitePieces, blackPieces)
+  renderPieces(whitePieces, blackPieces, boardArray)
+  moveWhitePieces(whitePieces, boardArray)
+  moveBlackPieces(blackPieces, boardArray)
+}
+
+createPieces(boardArray)
+
+
+// assigns each piece to there square
+function determineChessPieceById(whitePieces, blackPieces) {
+  whitePieces.map((e, i) => {
+    switch (true) {
+      case i < 8: return e.setAttribute("id", "pawn" + (i + 1))
+      break;
+      case i === 8: return e.setAttribute("id", "rook" + (i + 1))
+      break;
+      case i === 9: return e.setAttribute("id", "knight" + (i + 1))
+      break;
+      case i === 10: return e.setAttribute("id", "bishop" + (i + 1))
+      break;
+      case i === 11: return e.setAttribute("id", "queenWhite")
+      break;
+      case i === 12: return e.setAttribute("id", "kingWhite")
+      break;
+      case i === 13: return e.setAttribute("id", "bishop" + (i + 1))
+      break;
+      case i === 14: return e.setAttribute("id", "knight" + (i + 1))
+      break;
+      case i === 15: return e.setAttribute("id", "rook" + (i + 1))
+      break;
+    }
+  })
+  blackPieces.map((e, i) => {
+    switch (true) {
+      case i === 0: return e.setAttribute("id", "rook" + (i + 1))
+      break;
+      case i === 1: return e.setAttribute("id", "knight" + (i + 1))
+      break;
+      case i === 2: return e.setAttribute("id", "bishop" + (i + 1))
+      break;
+      case i === 3: return e.setAttribute("id", "queenBlack")
+      break;
+      case i === 4: return e.setAttribute("id", "kingBlack")
+      break;
+      case i === 5: return e.setAttribute("id", "bishop" + (i + 1))
+      break;
+      case i === 6: return e.setAttribute("id", "knight" + (i + 1))
+      break;
+      case i === 7: return e.setAttribute("id", "rook" + (i + 1))
+      break;
+      case i > 7: return e.setAttribute("id", "pawn" + (i + 1))
+    }
+  })
+}
+
+
+// renders pieces onto the board
+function renderPieces(whitePieces, blackPieces, boardArray) {
+  boardArray.slice(0, 16).forEach((square, i) => {
+    square.append(blackPieces[i])
+  })
+  boardArray.slice(48).forEach((square, i) => {
+    square.append(whitePieces[i])
+  })
+}
+
+// moves white pieces -- credit to https://www.youtube.com/watch?v=C22hQKE_32c for the drag and drop
+function moveWhitePieces(whitePieces, boardArray) {
+  whitePieces.map((piece) => {
+    piece.addEventListener("dragstart", function () {
+      pieceBeingMoved = piece
+    })
+    piece.addEventListener("dragend", function () {
+    })
+  })
+  boardArray.forEach((square) => {
+    square.addEventListener("dragover", function (e) {
+      e.preventDefault()
+    })
+    square.addEventListener("dragenter", function (e) {
+      e.preventDefault()
+    })
+    square.addEventListener("dragleave", function () {
+      square.className = "chessSquare"
+    })
+    square.addEventListener("drop", function (e) {
+      if (!square.children[0]) {
+        square.append(pieceBeingMoved)
+        square.className = "chessSquare"
+      } else if (square.children[0]) {
+        square.removeChild(square.children[0])
+        square.append(pieceBeingMoved)
+        square.className = "chessSquare"
       }
-  }
+    })
+  })
 }
-
-var center = document.createElement('center');
-
-// Create a table element
-var ChessTable = document.createElement('table');
-for (var i = 0; i < 8; i++) {
-  var tr = document.createElement('tr');
-  for (var j = 0; j < 8; j++) {
-    var td = document.createElement('td');
-    if ((i + j) % 2 == 0) {
-      td.setAttribute('class', 'cell whitecell');
-      tr.appendChild(td);
-    }
-    else {
-      td.setAttribute('class', 'cell blackcell');
-      tr.appendChild(td);
-    }
-  }
-  ChessTable.appendChild(tr);
-}
-center.appendChild(ChessTable);
-
-ChessTable.setAttribute('cellspacing', '0');
-ChessTable.setAttribute('width', '640px');
-document.body.appendChild(center);
-
-window.addEventListener('DOMContentLoaded', function () {
-
-  b_pawn1 = new ChessPiece(40, 120, "b-Pawn", 35, 35)
-  b_pawn2 = new ChessPiece(120, 120, "b-Pawn", 35, 35)
-  b_pawn3 = new ChessPiece(200, 120, "b-Pawn", 35, 35)
-  b_pawn4 = new ChessPiece(280, 120, "b-Pawn", 35, 35)
-  b_pawn5 = new ChessPiece(360, 120, "b-Pawn", 35, 35)
-  b_pawn6 = new ChessPiece(440, 120, "b-Pawn", 35, 35)
-  b_pawn7 = new ChessPiece(520, 120, "b-Pawn", 35, 35)
-  b_pawn8 = new ChessPiece(600, 120, "b-Pawn", 35, 35)
-  b_king = new ChessPiece(80, 60, "b-King", 35, 35)
-  b_queen = new ChessPiece(360, 60, "b-Queen", 35, 35)
-  b_bishop1 = new ChessPiece(200, 60, "b-Bishop", 35, 35)
-  b_bishop2 = new ChessPiece(440, 60, "b-Bishop", 35, 35)
-  b_knight1 = new ChessPiece(120, 60, "b-Knight", 35, 35)
-  b_knight2 = new ChessPiece(520, 60, "b-Knight", 35, 35)
-  b_rook1 = new ChessPiece(40, 60, "b-Rook", 35, 35)
-  b_rook2 = new ChessPiece(600, 60, "b-Rook", 35, 35)
-  w_pawn1 = new ChessPiece(40, 520, "w-Pawn", 35, 35)
-  w_pawn2 = new ChessPiece( 120, 520, "w-Pawn", 35, 35)
-  w_pawn3 = new ChessPiece(200, 520,  "w-Pawn", 35, 35)
-  w_pawn4 = new ChessPiece(280, 520, "w-Pawn", 35, 35)
-  w_pawn5 = new ChessPiece(360, 520, "w-Pawn", 35, 35)
-  w_pawn6 = new ChessPiece(440, 520, "w-Pawn", 35, 35)
-  w_pawn7 = new ChessPiece(520, 520, "w-Pawn", 35, 35)
-  w_pawn8 = new ChessPiece(600, 520, "w-Pawn", 35, 35)
-  w_king = new ChessPiece(280, 600, "w-King", 35, 35)
-  w_queen = new ChessPiece(360, 600, "w-Queen" , 35, 35)
-  w_bishop1 = new ChessPiece(200, 600, "w-Bishop", 35, 35)
-  w_bishop2 = new ChessPiece(440, 600, "w-Bishop", 35, 35)
-  w_knight1 = new ChessPiece(120, 600, "w-Knight", 35, 35)
-  w_knight2 = new ChessPiece(520, 600, "w-Knight", 35, 35)
-  w_rook1 = new ChessPiece(40, 600, "w-Rook",  35, 35)
-  w_rook2 = new ChessPiece(600, 600, "w-Rook",  35, 35)
-
-  const runGame = setInterval(gameLoop, 10);
-});
-
-function gameLoop() {
-
-    // clear the canvas
-    ctx.clearRect(0, 0, game.width, game.height);
-    if (ChessPiece.alive) {
-  b_pawn1.render()
-  b_pawn2.render()
-  b_pawn3.render()
-  b_pawn4.render()
-  b_pawn5.render()
-  b_pawn6.render()
-  b_pawn7.render()
-  b_pawn8.render()
-  b_king.render()
-  b_queen.render()
-  b_bishop1.render()
-  b_bishop2.render()
-  b_knight1.render()
-  b_knight2.render()
-  b_rook1.render()
-  b_rook2.render()
-  w_pawn1.render()
-  w_pawn2.render()
-  w_pawn3.render()
-  w_pawn4.render()
-  w_pawn5.render()
-  w_pawn6.render()
-  w_pawn7.render()
-  w_pawn8.render()
-  w_king.render()
-  w_queen.render()
-  w_bishop1.render()
-  w_bishop2.render()
-  w_knight1.render()
-  w_knight2.render()
-  w_rook1.render()
-  w_rook2.render()
-}
+// moves black pieces -- credit to https://www.youtube.com/watch?v=C22hQKE_32c for the drag and drop
+function moveBlackPieces(blackPieces, boardArray) {
+  blackPieces.map((piece) => {
+    piece.addEventListener("dragstart", function () {
+      pieceBeingMoved = piece
+    })
+    piece.addEventListener("dragend", function () {
+    })
+  })
+  boardArray.forEach((square) => {
+    square.addEventListener("dragover", function (e) {
+      e.preventDefault()
+    })
+    square.addEventListener("dragenter", function (e) {
+      e.preventDefault()
+    })
+    square.addEventListener("dragleave", function () {
+      square.className = "chessSquare"
+    })
+    square.addEventListener("drop", function (e) {
+      if (!square.children[0]) {
+        square.append(pieceBeingMoved)
+        square.className = "chessSquare"
+      } else if (square.children[0]) {
+        square.removeChild(square.children[0])
+        square.append(pieceBeingMoved)
+        square.className = "chessSquare"
+      }
+    })
+  })
 }

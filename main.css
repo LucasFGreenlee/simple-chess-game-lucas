@@ -1,24 +1,100 @@
-body {
-	text-align: center;
-}
+   .ChessBoard {
+   	width: 640px;
+   	height: 640px;
+   	border: 5px solid #000;
+   	margin: auto;
+   	margin-top: 2%;
+   	line-height: 0px;
+   }
 
-.cell {
-	height: 80px;
-	width: 80px;
-	border: 1.5px solid grey;
-	border-style: inset;
-}
+   .chessSquare {
+   	width: 80px;
+   	height: 80px;
+   	display: inline-block;
+   }
 
-.blackcell {
-	background-color: lightblue;
-}
+   .whitePiece {
+   	position: relative;
+   	width: 60px;
+   	height: 60px;
+   	left: 25%;
+   	top: 25%;
+   	transform: translate(-25%, -25%);
+   }
 
-.whitecell {
-	background-color: white;
-}
+   .blackPiece {
+   	position: relative;
+   	width: 60px;
+   	height: 60px;
+   	left: 25%;
+   	top: 25%;
+   	transform: translate(-25%, -25%);
+   }
 
-.chessPiece {
-	height: 40px;
-	width: 40px;
-	
-}
+   #pawn1,
+   #pawn2,
+   #pawn3,
+   #pawn4,
+   #pawn5,
+   #pawn6,
+   #pawn7,
+   #pawn8 {
+   	background: url(img/whitePawn.png);
+   }
+
+   #pawn9,
+   #pawn10,
+   #pawn11,
+   #pawn12,
+   #pawn13,
+   #pawn14,
+   #pawn15,
+   #pawn16 {
+   	background: url(img/blackPawn.png);
+   }
+
+   #rook9,
+   #rook16 {
+   	background: url(img/whiteRook.png);
+   }
+
+   #rook1,
+   #rook8 {
+   	background: url(img/blackRook.png);
+   }
+
+   #bishop11,
+   #bishop14 {
+   	background: url(img/whiteBishop.png);
+   }
+
+   #bishop3,
+   #bishop6 {
+   	background: url(img/blackBishop.png);
+   }
+
+   #knight10,
+   #knight15 {
+   	background: url(img/whiteHorse.png);
+   }
+
+   #knight2,
+   #knight7 {
+   	background: url(img/blackHorse.png);
+   }
+
+   #kingWhite {
+   	background: url(img/whiteKing.png);
+   }
+
+   #queenWhite {
+   	background: url(img/whiteQueen.png);
+   }
+
+   #kingBlack {
+   	background: url(img/blackKing.png);
+   }
+
+   #queenBlack {
+   	background: url(img/blackQueen.png);
+   }
