@@ -1,6 +1,7 @@
 const boardArray = []; 
 let pieceBeingMoved;
 
+
 // defines the color of each square
 function squareColor(e, i) {
   if ((i >= 0 && i <= 7) || (i >= 16 && i <= 23) || (i >= 32 && i <= 39) || (i >= 48 && i <= 55)) {
@@ -23,10 +24,7 @@ function renderSquares() {
   }
   boardArray.forEach((e, i) => {
     squareColor(e, i)
-    e.addEventListener("click", function () {
-      console.log(i, e)
     })
-  })
   return boardArray.forEach((e) => {
     return ChessBoard.append(e)
   })
@@ -43,10 +41,12 @@ function createPieces(boardArray) {
     const whitePiece = document.createElement("div")
     whitePiece.classList.add("whitePiece")
     whitePiece.setAttribute("draggable", "true")
+    whitePiece.setAttribute('color', 'white')
     whitePieces.push(whitePiece)
     const blackPiece = document.createElement("div")
     blackPiece.classList.add("blackPiece")
     blackPiece.setAttribute("draggable", "true")
+    blackPiece.setAttribute("color", 'black')
     blackPieces.push(blackPiece)
     pieces += 1
   }
@@ -132,6 +132,7 @@ function moveWhitePieces(whitePieces, boardArray) {
     })
     square.addEventListener("dragenter", function (e) {
       e.preventDefault()
+      dropPiece = square
     })
     square.addEventListener("dragleave", function () {
       square.className = "chessSquare"
@@ -160,22 +161,35 @@ function moveBlackPieces(blackPieces, boardArray) {
   boardArray.forEach((square) => {
     square.addEventListener("dragover", function (e) {
       e.preventDefault()
+      console.log('drag over')
     })
     square.addEventListener("dragenter", function (e) {
       e.preventDefault()
+      console.log('drag enter')
     })
     square.addEventListener("dragleave", function () {
-      square.className = "chessSquare"
+      console.log('drag leave')
     })
     square.addEventListener("drop", function (e) {
-      if (!square.children[0]) {
+      console.log(e.target.className)
+      if (e.target.className === 'chessSquare') {
+        console.log('just replace')
+      } else {
+        if (pieceBeingMoved.className !== e.target.className) {
+          console.log('I won!!')
+        } else {
+          console.log('illegal move')
+        }
+      }
+    /*  if (!square.children[0]) {
         square.append(pieceBeingMoved)
-        square.className = "chessSquare"
+        console.log('drop')
       } else if (square.children[0]) {
         square.removeChild(square.children[0])
         square.append(pieceBeingMoved)
         square.className = "chessSquare"
-      }
+        console.log('drop')
+      } */
     })
   })
 }
