@@ -1,6 +1,7 @@
 const boardArray = []; 
 let pieceBeingMoved;
-
+let whiteScore = 0;
+let blackScore = 0;
 
 // defines the color of each square
 function squareColor(e, i) {
@@ -132,7 +133,7 @@ function moveWhitePieces(whitePieces, boardArray) {
     })
     square.addEventListener("dragenter", function (e) {
       e.preventDefault()
-      dropPiece = square
+  
     })
     square.addEventListener("dragleave", function () {
       square.className = "chessSquare"
@@ -173,10 +174,11 @@ function moveBlackPieces(blackPieces, boardArray) {
     square.addEventListener("drop", function (e) {
       console.log(e.target.className)
       if (e.target.className === 'chessSquare') {
-        console.log('just replace')
+        console.log('normal move')
       } else {
         if (pieceBeingMoved.className !== e.target.className) {
-          console.log('I won!!')
+          console.log('take enemy')
+          blackScore++
         } else {
           console.log('illegal move')
         }
