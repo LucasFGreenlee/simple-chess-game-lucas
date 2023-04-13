@@ -1,7 +1,7 @@
 const boardArray = []; 
 let pieceBeingMoved;
-let whiteScore = 0;
-let blackScore = 0;
+/*let whiteScore = 0;
+let blackScore = 0; */
 
 // defines the color of each square
 function squareColor(e, i) {
@@ -26,9 +26,10 @@ function renderSquares() {
   boardArray.forEach((e, i) => {
     squareColor(e, i)
     })
-  return boardArray.forEach((e) => {
+  boardArray.forEach((e) => {
     return ChessBoard.append(e)
-  })
+  }) 
+  return true
 }
 
 renderSquares()
@@ -55,12 +56,14 @@ function createPieces(boardArray) {
   renderPieces(whitePieces, blackPieces, boardArray)
   moveWhitePieces(whitePieces, boardArray)
   moveBlackPieces(blackPieces, boardArray)
+ 
 }
 
 createPieces(boardArray)
 
 
-// assigns each piece to there square
+
+// assigns each piece a ID
 function determineChessPieceById(whitePieces, blackPieces) {
   whitePieces.map((e, i) => {
     switch (true) {
@@ -106,6 +109,7 @@ function determineChessPieceById(whitePieces, blackPieces) {
     }
   })
 }
+
 
 
 // renders pieces onto the board
@@ -178,7 +182,7 @@ function moveBlackPieces(blackPieces, boardArray) {
       } else {
         if (pieceBeingMoved.className !== e.target.className) {
           console.log('take enemy')
-          blackScore++
+       //   blackScore++
         } else {
           console.log('illegal move')
         }

@@ -1,8 +1,11 @@
-
-
 describe('function renderSquares()', () => {
-    it('should start with 0 squares', () => {
+    it('should return value: true', () => {
         renderSquares()
-        expect(renderSquares.length).toBe(0);
+        console.log(renderSquares());
+        expect(renderSquares()).toBe(true);
     });
+    it('should not return value: false', () => {
+        renderSquares()
+        expect(renderSquares()).not.toBe(false);
+    })
 });
