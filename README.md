@@ -36,4 +36,11 @@ I ran into trouble creating rules for each piece's movement, and not taking piec
 
 Plans:
 
-In the future, I plan to add rules for each piece's own movement, I would love to add and AI to play against with different levels of difficulty, and a leaderboard displaying games won and the amount of turns taken to win.
+I would like to add:
+
+        -movement rules
+        -seperate scores and/ or a graveyard
+        -check/ checkmate
+        -AI to play against
+        -a timer for each player turn
+        -cooler CSS
