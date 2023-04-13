@@ -6,7 +6,7 @@ A working chessboard created through vanilla JS:
     Installation:
         https://simple-chess-game007.netlify.app/
 
-    This app works as a realistic chessboard, allowing the user to drag and drop any piece anywhere they want on the board, as in real life. It is a two player game made through HTML CSS and Javascript. I found my best way to approach the project was to take everything one step at a time, slow and steady wins the race! 
+    This app works as a realistic chessboard, allowing the user to drag and drop any piece anywhere they want on the board, as in real life. It is a two player game made through HTML CSS and Javascript. I found my best way to approach the project was to take everything one step at a time.
 
     A piece of code I am proud of:
 addEventListener("dragstart", function () {})
