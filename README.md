@@ -2,7 +2,8 @@ A working chessboard created through vanilla JS:
     
 Gameplay:
 
-        Drag and Drop chessboard
+        Drag and Drop chessboard;
+        use your cursor to pick up and place chess pieces
 
 Installation:
 
