@@ -166,14 +166,14 @@ function moveBlackPieces(blackPieces, boardArray) {
   boardArray.forEach((square) => {
     square.addEventListener("dragover", function (e) {
       e.preventDefault()
-      console.log('drag over')
+
     })
     square.addEventListener("dragenter", function (e) {
       e.preventDefault()
-      console.log('drag enter')
+
     })
     square.addEventListener("dragleave", function () {
-      console.log('drag leave')
+
     })
     square.addEventListener("drop", function (e) {
       console.log(e.target.className)
