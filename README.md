@@ -32,8 +32,8 @@ During this project, I learned how to implement drag and drop mechanics through 
 
 Issues:
 
-        I ran into trouble creating rules for each piece's movement, and not taking pieces of your own color. I also ran into trouble displaying a winner, as I cannot have a checkmate without rules. I tried implementing a win factor on taking enemy king but also ran into some issues there. The last issue I had was with testing, I need more practice writing tests.
+I ran into trouble creating rules for each piece's movement, and not taking pieces of your own color. I also ran into trouble displaying a winner, as I cannot have a checkmate without rules. I tried implementing a win factor on taking enemy king but also ran into some issues there. The last issue I had was with testing, I need more practice writing tests.
 
 Plans:
 
-        In the future, I plan to add rules for each piece's own movement, I would love to add and AI to play against with different levels of difficulty, and a leaderboard displaying games won and the amount of turns taken to win.
+In the future, I plan to add rules for each piece's own movement, I would love to add and AI to play against with different levels of difficulty, and a leaderboard displaying games won and the amount of turns taken to win.
