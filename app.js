@@ -1,7 +1,7 @@
 const boardArray = []; 
 let pieceBeingMoved;
-/*let whiteScore = 0;
-let blackScore = 0; */
+let whiteScore = 0;
+let blackScore = 0;
 
 // defines the color of each square
 function squareColor(e, i) {
@@ -182,7 +182,8 @@ function moveBlackPieces(blackPieces, boardArray) {
       } else {
         if (pieceBeingMoved.className !== e.target.className) {
           console.log('take enemy')
-       //   blackScore++
+          blackScore++
+          console.log('score', blackScore);
         } else {
           console.log('illegal move')
         }
